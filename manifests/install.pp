@@ -8,8 +8,9 @@ class hpcc::install {
     fail("architecture must be 64bit")           
   }
 
-  $ver   = $::hpcc::version
-  $pname = "hpccsystems-platform_community-"
+  $ver    = $::hpcc::version
+  $majver = $::hpcc::majver
+  $pname  = "hpccsystems-platform_community-"
 
   case $::operatingsystem {
   'Ubuntu': {
@@ -38,20 +39,24 @@ class hpcc::install {
         true  => "${pname}with-plugins-${ver}.el6.x86_64.rpm",
         false => "${pname}${ver}.el6.x86_64.rpm",
       }
+    }
     default: { fail("Unsupported version of CentOS") }
     } # end case ::operatingsystemmajrelease
   } # end case CentOS
   } # end case ::operatingsystem
-    
-  package { "hpccsystems-platform":
-    ensure   => present,
-    provider => $packagetype,
-    source   => "/tmp/$packagename",
-  }
+  
+  $already_installed = str2bool($::is_hpcc_installed)
+  if ( !$already_installed ) {    
+    package { 'hpccsystems-platform':
+      ensure   => installed,
+      provider => $packtype,
+      source   => "/tmp/${pack}",
+    }
 
-  exec { "/tmp/hpccsystems-platform":
-    cwd     => '/tmp',
-    command => "http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
-    before  => Package['hpccsystems-platform'],
+    exec { '/tmp/hpccsystems-platform':
+      cwd     => '/tmp',
+      command => "/usr/bin/wget http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
+      before  => Package['hpccsystems-platform'],
+    }
   }   
 }

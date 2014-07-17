@@ -18,6 +18,15 @@ class hpcc
   validate_absolute_path($config_dir)
   validate_bool($service_ensure)
   validate_bool($service_enable)
+  validate_string($majver)
+  validate_string($version)
+
+  anchor { 'hpcc::begin': }
+  anchor { 'hpcc::end': }
+
+  class { 'hpcc::install': }
+  class { 'hpcc::config': }
+  class { 'hpcc::service': }
 
   # setup resource chain
   Anchor['hpcc::begin'] ->

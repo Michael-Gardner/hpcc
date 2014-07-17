@@ -5,10 +5,9 @@
 #
 class hpcc::service
 {
-  service { 'hpcc':
-    name       => 'hpcc-init',
+  service { 'hpcc-init':
     hasrestart => true,
-    ensure     => $::hpcc::ensure,
-    enable     => $::hpcc::enable,
+    ensure     => $::hpcc::service_ensure,
+    enable     => $::hpcc::service_enable,
   }
 }

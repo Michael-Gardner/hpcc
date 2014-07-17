@@ -1,5 +1,5 @@
 # Author:   Michael Jon Gardner
-i# Email:    vintage910@hotmail.com
+# Email:    vintage910@hotmail.com
 # Date:     July 9, 2014
 # License:  GPL v3
 #
@@ -15,14 +15,17 @@ class hpcc::config
   file { 'hpcc/environment.xml.puppet':
     path   => "${_confdir}/environment.xml.puppet",
     ensure => file,
-    source => 'puppet://modules/hpcc/environment.xml.puppet',
+    owner  => 'hpcc',
+    group  => 'hpcc',
+    mode   => '0644',
+    source => 'puppet:///modules/hpcc/environment.xml',
     before => Exec['hpcc/environment.xml'],
   }
  
   exec { 'hpcc/environment.xml':
     # combine them into this so it's as atomic as we can make it.
-    command => 'service hpcc-init stop && /bin/cp environment.xml.puppet environment.xml && service hpcc-init start',
-    unless  => '/bin/diff environment.xml.puppet environment.xml', # diff returns 0 if they match
+    command => '/sbin/service hpcc-init stop && /bin/cp environment.xml.puppet environment.xml && /sbin/service hpcc-init start',
+    unless  => '/usr/bin/diff environment.xml.puppet environment.xml', # diff returns 0 if they match
     cwd     => $_confdir,
   }
 }
