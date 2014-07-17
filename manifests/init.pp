@@ -10,6 +10,8 @@ class hpcc
   $config_dir     = $hpcc::params::config_dir,
   $service_ensure = $hpcc::params::service_ensure,
   $service_enable = $hpcc::params::service_enable,
+  $majver         = $hpcc::params::majver,
+  $version        = $hpcc::params::version,
 ) inherits hpcc::params {
   # validate everything here, in one place
   validate_bool($plugin)
