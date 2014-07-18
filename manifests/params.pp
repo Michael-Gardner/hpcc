@@ -29,11 +29,12 @@
 #
 class hpcc::params
 {
+  $role           = 'slave'
   $plugin         = false
   $config_dir     = '/etc/HPCCSystems'
   $service_ensure = true
   $service_enable = true
   $version        = '5.0.0-2'
   $majver         = '5.0.0'
-  $hpcc_file_path = '/etc/puppet/environments/build/modules/hpcc/files/'
+  $hpcc_file_path = '/etc/puppet/environments/build/modules/hpcc/files'
 }

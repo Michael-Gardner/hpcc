@@ -13,14 +13,12 @@ class hpcc
   $majver         = $hpcc::params::majver,
   $version        = $hpcc::params::version,
   $hpcc_file_path = $hpcc::params::hpcc_file_path,
+  $role           = $hpcc::params::role,
 ) inherits hpcc::params {
   # validate everything here, in one place
-  validate_bool($plugin)
-  validate_absolute_path($config_dir)
-  validate_bool($service_ensure)
-  validate_bool($service_enable)
-  validate_string($majver)
-  validate_string($version)
+  validate_absolute_path($config_dir,$hpcc_file_path)
+  validate_bool($plugin,$service_enable,$service_ensure)
+  validate_string($version,$majver,$role)
 
   anchor { 'hpcc::begin': }
   anchor { 'hpcc::end': }
@@ -30,11 +28,26 @@ class hpcc
   class { 'hpcc::config': }
   class { 'hpcc::service': }
 
+  if ( $role == 'slave' ) {
   # setup resource chain
-  Anchor['hpcc::begin'] ->
-    Class['hpcc::dependencies'] ->
-      Class['hpcc::install'] ->
-        Class['hpcc::config'] ~>
-          Class['hpcc::service'] ->
-            Anchor['hpcc::end']
+    Anchor['hpcc::begin'] ->
+      Class['hpcc::dependencies'] ->
+        Class['hpcc::install'] ->
+          Class['hpcc::config'] ~>
+            Class['hpcc::service'] ->
+              Anchor['hpcc::end']
+  }
+
+  if ( $role == 'master' ) {
+    class { 'hpcc::keygen': }
+    Anchor['hpcc::begin'] ->
+      Class['hpcc::dependencies'] ->
+        Class['hpcc::install'] ->
+          Class['hpcc::keygen'] -> 
+            Class['hpcc::config'] ~>
+              Class['hpcc::service'] ->
+                Anchor['hpcc::end']
+
+  }
+
 }
