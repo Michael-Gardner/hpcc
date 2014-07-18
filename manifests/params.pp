@@ -35,4 +35,5 @@ class hpcc::params
   $service_enable = true
   $version        = '5.0.0-2'
   $majver         = '5.0.0'
+  $hpcc_file_path = '/etc/puppet/environments/build/modules/hpcc/files/'
 }
