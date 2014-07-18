@@ -46,10 +46,9 @@ class hpcc::dependencies
     }#end case ::operatingsystemmajrelease
   }#end CentOS
   }#end case ::operatingsystem
-  
-  if ( !$::is_hpcc_installed ) {
-    package { $package_list :
-      ensure => present,
-    }
+    
+  package { $package_list :
+    ensure => present,
   }
+  
 }

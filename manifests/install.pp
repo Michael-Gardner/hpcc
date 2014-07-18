@@ -45,18 +45,16 @@ class hpcc::install {
   } # end case CentOS
   } # end case ::operatingsystem
   
-  $already_installed = str2bool($::is_hpcc_installed)
-  if ( !$already_installed ) {    
-    package { 'hpccsystems-platform':
-      ensure   => installed,
-      provider => $packtype,
-      source   => "/tmp/${pack}",
-    }
+  package { 'hpccsystems-platform':
+    ensure   => installed,
+    provider => $packtype,
+    source   => "/tmp/${pack}",
+  }
 
-    exec { '/tmp/hpccsystems-platform':
-      cwd     => '/tmp',
-      command => "/usr/bin/wget http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
-      before  => Package['hpccsystems-platform'],
-    }
-  }   
+  exec { '/tmp/hpccsystems-platform':
+    cwd     => '/tmp',
+    command => "/usr/bin/wget http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
+    before  => Package['hpccsystems-platform'],
+    unless  => '/bin/bash -c \'[[ -e /etc/init.d/hpcc-init ]]\'',
+  }     
 }
