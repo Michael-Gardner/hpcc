@@ -48,7 +48,8 @@ class hpcc::dependencies
   }#end case ::operatingsystem
     
   package { $package_list :
-    ensure => present,
+    ensure        => present,
+    allow_virtual => false,
   }
   
 }
