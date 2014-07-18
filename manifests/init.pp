@@ -24,14 +24,16 @@ class hpcc
   anchor { 'hpcc::begin': }
   anchor { 'hpcc::end': }
 
+  class { 'hpcc::dependencies': }
   class { 'hpcc::install': }
   class { 'hpcc::config': }
   class { 'hpcc::service': }
 
   # setup resource chain
   Anchor['hpcc::begin'] ->
-    Class['hpcc::install'] ->
-      Class['hpcc::config'] ~>
-        Class['hpcc::service'] ->
-          Anchor['hpcc::end']
+    Class['hpcc::dependencies'] ->
+      Class['hpcc::install'] ->
+        Class['hpcc::config'] ~>
+          Class['hpcc::service'] ->
+            Anchor['hpcc::end']
 }
