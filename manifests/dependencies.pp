@@ -1,5 +1,6 @@
 class hpcc::dependencies
 {
+  
   case $::operatingsystem {
   'Ubuntu': {
     case $::operatingsystemrelease {
@@ -11,14 +12,24 @@ class hpcc::dependencies
    }
   'CentOS': {
     case $::operatingsystemmajrelease {
-    '5': { }
-    '6': { $package_list = [ 'apr', 'apr-util', 'boost-regex', 'libarchive',
-            'libtool', 'libxslt', ] }
+    '5': { $package_list = ['boost141-regex','openldap',
+                            'libicu','m4','libtool',
+                            'xalan-c','xerces-c','gcc-c++',
+                            'openssh-server','openssh-clients',
+                            'expect','libarchive','rsync',
+                            'apr','apr-util',]}
+    '6': { $package_list = ['boost-regex','openldap', 
+                            'libicu','m4','libtool','libxslt', 
+                            'libxml2','gcc-c++','openssh-server',
+                            'openssh-clients','expect','libarchive', 
+                            'rsync', 'apr','apr-util',]}
     }
   }
   }
-
-  package { $package_list :
-    ensure => present,
+  
+  if ( !$::is_hpcc_installed ) {
+    package { $package_list :
+      ensure => present,
+    }
   }
 }
