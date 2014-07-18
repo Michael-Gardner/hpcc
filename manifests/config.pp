@@ -11,6 +11,31 @@ class hpcc::config
 
   # All hpcc services MUST be stopped before changing the
   # environment.xml file
+  file { 'authorized_keys':
+    path   => '/home/hpcc/.ssh/authorized_keys',
+    ensure => file,
+    owner  => 'hpcc',
+    group  => 'hpcc',
+    mode   => '0644',
+    source => 'puppet:///modules/hpcc/authorized_keys',
+  }
+  file { 'id_rsa':
+    path   => '/home/hpcc/.ssh/id_rsa',
+    ensure => file,
+    owner  => 'hpcc',
+    group  => 'hpcc',
+    mode   => '0600',
+    source => 'puppet:///modules/hpcc/id_rsa',
+  }
+  file { 'id_rsa.pub':
+    path   => '/home/hpcc/.ssh/id_rsa.pub',
+    ensure => file,
+    owner  => 'hpcc',
+    group  => 'hpcc',
+    mode   => '0600',
+    source => 'puppet:///modules/hpcc/id_rsa.pub',
+  }
+
 
   file { 'hpcc/environment.xml.puppet':
     path   => "${_confdir}/environment.xml.puppet",
