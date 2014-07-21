@@ -20,12 +20,20 @@ class hpcc
   $config_thor    = $hpcc::params::config_thor,
   $config_tslave  = $hpcc::params::config_tslave,
   $config_iplist  = $hpcc::params::config_iplist,
-
 ) inherits hpcc::params {
   # validate everything here, in one place
-  validate_absolute_path($config_dir,$hpcc_file_path)
+  validate_absolute_path($config_dir,$hpcc_file_path,$config_iplist)
   validate_bool($plugin,$service_enable,$service_ensure)
-  validate_string($version,$majver,$role)
+  validate_string($version,$majver,$role,$config_support,$config_roxie)
+  validate_string($config_thor,$config_tslave)
+  
+  $config_roxieondemand = $hpcc::params::config_roxieondemand ? {
+    true  => '1',
+    false => '2',
+  }
+
+  # end validation
+
 
   anchor { 'hpcc::begin': }
   anchor { 'hpcc::end': }
