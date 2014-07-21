@@ -28,8 +28,9 @@ class hpcc
   validate_string($config_thor,$config_tslave)
   
   $config_roxieondemand = $hpcc::params::config_roxieondemand ? {
-    true  => '1',
-    false => '2',
+    true    => '1',
+    false   => '2',
+    default => '1',
   }
 
   # end validation
@@ -55,13 +56,16 @@ class hpcc
 
   if ( $role == 'master' ) {
     class { 'hpcc::keygen': }
+    class { 'hpcc::configmgr': }
+
     Anchor['hpcc::begin'] ->
       Class['hpcc::dependencies'] ->
         Class['hpcc::install'] ->
           Class['hpcc::keygen'] -> 
-            Class['hpcc::config'] ~>
-              Class['hpcc::service'] ->
-                Anchor['hpcc::end']
+            Class['hpcc::configmgr'] ->
+              Class['hpcc::config'] ~>
+                Class['hpcc::service'] ->
+                  Anchor['hpcc::end']
 
   }
 
