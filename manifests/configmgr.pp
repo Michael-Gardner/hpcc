@@ -17,9 +17,9 @@ class hpcc::configmgr
   anchor { 'hpcc::configmgr::begin': }
   anchor { 'hpcc::configmgr::end': }
 
-  Anchor['hpcc::config::begin']->
+  Anchor['hpcc::configmgr::begin']->
     Exec['envgen']~>
       Exec['master environment.xml']->
-        Anchor['hpcc::config::end']
+        Anchor['hpcc::configmgr::end']
 
 }
