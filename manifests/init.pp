@@ -14,6 +14,13 @@ class hpcc
   $version        = $hpcc::params::version,
   $hpcc_file_path = $hpcc::params::hpcc_file_path,
   $role           = $hpcc::params::role,
+
+  $config_support = $hpcc::params::config_support,
+  $config_roxie   = $hpcc::params::config_roxie,
+  $config_thor    = $hpcc::params::config_thor,
+  $config_tslave  = $hpcc::params::config_tslave,
+  $config_iplist  = $hpcc::params::config_iplist,
+
 ) inherits hpcc::params {
   # validate everything here, in one place
   validate_absolute_path($config_dir,$hpcc_file_path)

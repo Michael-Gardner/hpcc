@@ -46,9 +46,10 @@ class hpcc::install {
   } # end case ::operatingsystem
   
   package { 'hpccsystems-platform':
-    ensure   => installed,
-    provider => $packtype,
-    source   => "/tmp/${pack}",
+    ensure        => installed,
+    provider      => $packtype,
+    source        => "/tmp/${pack}",
+    allow_virtual => false,
   }
 
   exec { '/tmp/hpccsystems-platform':
