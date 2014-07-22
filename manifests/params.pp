@@ -38,6 +38,7 @@ class hpcc::params
   $majver         = '5.0.0'
   $hpcc_file_path = '/etc/puppet/environments/build/modules/hpcc/files'
 
+  $config_env           = true
   $config_support       = '1'
   $config_roxie         = '2'
   $config_thor          = '2'
