@@ -40,9 +40,9 @@ class hpcc::params
 
   $config_env           = true
   $config_support       = '1'
-  $config_roxie         = '2'
-  $config_thor          = '2'
-  $config_tslave        = '2'
+  $config_roxie         = '1'
+  $config_thor          = '1'
+  $config_tslave        = '1'
   $config_iplist        = "${hpcc_file_path}/iplist"
   $config_roxieondemand = true
 }
