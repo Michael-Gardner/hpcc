@@ -33,6 +33,13 @@ the HPCC-Platform can be found at www.hpccsystems.com.
 
 Under your nodes.pp or site.pp it will be necessary to declare the hpcc class.  All information for the computational nodes should be pulled directly from the hpcc::params class.  The master is the only truly unique node and as such should be the only declaration with modified parameters (if necessary.)
 
+```puppet
+# $(confdir)/environments/<myenv>/manifests/nodes.pp
+
+node computation {
+  include hpcc
+}
+```
 
 ##Usage
 
