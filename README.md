@@ -29,15 +29,15 @@ the HPCC-Platform can be found at www.hpccsystems.com.
 
 ##Setup
 
-###Master Configuration
+####Master Configuration
 
-###Computation Nodes
+####Computation Nodes
 
 
 
 ##Usage
 
-###Envgen
+####Envgen
 
 Envgen is the script that allows us to map nodes in the cluster to specific roles within the HPCC-Platform.
 
