@@ -21,9 +21,7 @@ The HPCC-Platform is a massive parallel-processing computing platform that solve
 
 ##About the Module
 
-This module is designed for a quick and easy installation and setup of the HPCC-Platform cluster on environments utilizing puppet as an administrative tool for their linux environments.
-It is not designed to be used heavily in production (as having puppet running alongside a roxie or thor node is unnecessary resource overhead.)  Please use this tool to become better 
-aquanted with our implementation of a High Performance Computing Cluster to see if it meets your organizations Big Data needs.  Documentation and whitepapers regarding the running of 
+This module is designed for a quick and easy installation and setup of the HPCC-Platform cluster on environments utilizing puppet as an administrative tool for linux environments.  It is not designed to be used heavily in production (as having puppet running alongside a roxie or thor node is unnecessary resource overhead.)  Please use this tool to become better aquanted with our implementation of a High Performance Computing Cluster to see if it meets your organizations Big Data needs.  Documentation and whitepapers regarding the running of 
 the HPCC-Platform can be found at www.hpccsystems.com.
 
 
@@ -79,6 +77,6 @@ The platform is designed and packaged for the following operating systems.  Any 
 
 ##Contact
 
-In order to contact us, please visit our community forums at hpccsystems.com/bb/.
+In order to contact us, please visit our community forums at http://hpccsystems.com/bb/.
 
 
