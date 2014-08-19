@@ -1,13 +1,36 @@
 {
-  "author": "",
-  "dependencies": [],
-  "license": "",
-  "name": "adhok-hpcc",
-  "operatingsystem_support": [],
-  "project_page": "",
-  "requirements": [],
-  "source": "",
-  "summary": "",
-  "tags": [],
-  "version": "0.1.0"
+  "name": "hpccsystems-hpcc",
+  "version": "0.1.0",
+  "author": "Michael Jon Gardner",
+  "license": "Apache 2.0",
+  "summary": "Quickly setup a basic HPCC-Platform cluster for testing and evaluation",
+  "source": "https:://github.com/Michael-Gardner/hpcc",
+  "project_page": "https:://github.com/Michael-Gardner/hpcc",
+  "dependencies": [
+  	{
+  		"name": "puppetlabs/stdlib",
+  		"version_requirement": ">= 3.2.0"
+  	}
+  ],
+  "operatingsystem_support": [
+  	{
+  		"operatingsystem": "CentOS",
+  		"operatingsystemrelease": ["5", "6"]
+  	},
+  	{
+  		"operatingsystem": "Ubuntu",
+  		"operatingsystemrelease": ["10.04", "12.04", "13.10", "14.04"]
+  	}
+  ],
+  "requirements": [
+  	{
+  		"name": "pe",
+  		"version_requirement": "3.x"
+  	},
+  	{
+  		"name": "puppet",
+  		"version_requirement": "3.x"
+  	}
+  ],
+  "tags": ["hpcc", "hpcc-platform","hpccsystems","data"]
 }

@@ -29,20 +29,18 @@
 #
 class hpcc::params
 {
-  $role           = 'slave'
+  $role           = 'computation'
   $plugin         = false
   $config_dir     = '/etc/HPCCSystems'
   $service_ensure = true
   $service_enable = true
   $version        = '5.0.0-2'
   $majver         = '5.0.0'
-  $hpcc_file_path = '/etc/puppet/environments/build/modules/hpcc/files'
-
+  
   $config_env           = true
   $config_support       = '1'
   $config_roxie         = '1'
   $config_thor          = '1'
   $config_tslave        = '1'
-  $config_iplist        = "${hpcc_file_path}/iplist"
   $config_roxieondemand = true
 }
