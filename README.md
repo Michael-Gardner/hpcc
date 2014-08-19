@@ -31,6 +31,7 @@ the HPCC-Platform can be found at www.hpccsystems.com.
 
 ####Computation Nodes
 
+Under your nodes.pp or site.pp it will be necessary to declare the hpcc class.  All information for the computational nodes should be pulled directly from the hpcc::params class.  The master is the only truly unique node and as such should be the only declaration with modified parameters (if necessary.)
 
 
 ##Usage
@@ -60,7 +61,7 @@ The platform is designed and packaged for the following operating systems.  Any 
 * Ubuntu 14.04 LTS
 
 ##License
--------
+
     HPCC SYSTEMS software Copyright (C) 2012 HPCC Systems.
 
     Licensed under the Apache License, Version 2.0 (the "License");
