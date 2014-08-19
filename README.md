@@ -29,9 +29,14 @@ the HPCC-Platform can be found at www.hpccsystems.com.
 
 ####Master Configuration
 
+Under your nodes.pp or site.pp it will be necessary to declare the hpcc class with a role of 'controller' upon the puppetmaster controlling your cluster.  It is necessary as this module utilizes puppets file resource heavily to ensure that the environment.xml is propagated across the entire cluster ([See Envgen for more information](#envgen).) 
+
+
+
+
 ####Computation Nodes
 
-Under your nodes.pp or site.pp it will be necessary to declare the hpcc class.  All information for the computational nodes should be pulled directly from the hpcc::params class.  The master is the only truly unique node and as such should be the only declaration with modified parameters (if necessary.)
+Under your nodes.pp or site.pp it will be necessary to include the hpcc class.  All information for the computational nodes should be pulled directly from the hpcc::params class.  The master is the only truly unique node and as such should be the only declaration with modified parameters (if necessary.)
 
 ```puppet
 # $(confdir)/environments/<myenv>/manifests/nodes.pp
