@@ -12,7 +12,6 @@ class hpcc
   $service_enable = $hpcc::params::service_enable,
   $majver         = $hpcc::params::majver,
   $version        = $hpcc::params::version,
-  $hpcc_file_path = $hpcc::params::hpcc_file_path,
   $role           = $hpcc::params::role,
 
   $config_env     = $hpcc::params::config_env,
@@ -20,10 +19,9 @@ class hpcc
   $config_roxie   = $hpcc::params::config_roxie,
   $config_thor    = $hpcc::params::config_thor,
   $config_tslave  = $hpcc::params::config_tslave,
-  $config_iplist  = $hpcc::params::config_iplist,
 ) inherits hpcc::params {
   # validate everything here, in one place
-  validate_absolute_path($config_dir,$hpcc_file_path,$config_iplist)
+  validate_absolute_path($config_dir)
   validate_bool($plugin,$service_enable,$service_ensure,$config_env)
   validate_string($version,$majver,$role,$config_support,$config_roxie)
   validate_string($config_thor,$config_tslave)
