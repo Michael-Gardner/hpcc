@@ -40,7 +40,7 @@ class hpcc
   class { 'hpcc::install': }
   class { 'hpcc::config': }
 
-  if ( $role == 'slave' ) {
+  if ( $role == 'computation' ) {
   # setup resource chain
     Anchor['hpcc::begin'] ->
       Class['hpcc::dependencies'] ->

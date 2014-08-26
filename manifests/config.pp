@@ -5,9 +5,6 @@
 #
 # written by binford2k and modified by Michael Gardner
 class hpcc::config {
-  # strip off ending / if necessary from confdir
-  $confdir = regsubst($::hpcc::config_dir, '$/', '')
-
   # All hpcc services MUST be stopped before changing the
   # environment.xml file
   file { 'authorized_keys':
