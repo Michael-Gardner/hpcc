@@ -12,21 +12,22 @@
 #   loads the plugin version of hpcc if available instead
 #   of the standard package
 #
-# config_dir
-#   type string
-#   path to the configuration directory of your hpcc
-#   installation
+# role
+#   'computation' for a node that will act in the cluster
+#   'controller'  goes on the puppet master, where you will run
+#     all the hpcc-platform provided tools from to control your node
 #
-# service_ensure
-#   type boolean
-#   true  for running
-#   false for stopped
+# config_env
+#   boolean
+#     true -> controller will setup an environment.xml file based upon the
+#       following variables.
+#     false -> you have to do it yourself with the configmgr program provided
+#       by the hpcc-platform, and stage it yourself in the hpcc/files directory
 #
-# service_enable
-#   type boolean
-#   true  for enabled  at boot
-#   false for disabled at boot
-#
+# basic configuration setup is for a single node system.  For more information
+# about the envgen variables please read the README.md on puppetforge and on our
+# github repository, and/or the administration documentation linked therein.
+
 class hpcc::params
 {
   $role           = 'computation'

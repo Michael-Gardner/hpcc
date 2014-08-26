@@ -38,7 +38,7 @@ class hpcc::config {
   }
 
   file { 'hpcc/environment.xml.puppet':
-    path   => "${confdir}/environment.xml.puppet",
+    path   => "/etc/HPCCSystems/environment.xml.puppet",
     ensure => file,
     owner  => 'hpcc',
     group  => 'hpcc',
@@ -51,6 +51,6 @@ class hpcc::config {
     # combine them into this so it's as atomic as we can make it.
     command => '/bin/bash -c \'service hpcc-init stop && /bin/cp environment.xml.puppet environment.xml\'',
     unless  => '/bin/bash -c \'diff environment.xml.puppet environment.xml\'', # diff returns 0 if they match
-    cwd     => $confdir,
+    cwd     => '/etc/HPCCSystems/',
   }
 }
