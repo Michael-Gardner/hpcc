@@ -15,6 +15,7 @@ class hpcc::install {
   case $::operatingsystem {
     'Ubuntu' : {
       $packtype = "dpkg"
+      $removal  = "-r"
       case $::operatingsystemrelease {
         '10.04' : { $pack = "${pname}${ver}lucid_amd64.deb" }
         '12.04' : { $pack = "${pname}${ver}precise_amd64.deb" }
@@ -27,6 +28,7 @@ class hpcc::install {
     } # end case Ubuntu
     'CentOS' : {
       $packtype = "rpm"
+      $removal  = "-e"
       case $::operatingsystemmajrelease {
         '5': { 
           $pack = $::hpcc::plugin ? {
@@ -44,17 +46,24 @@ class hpcc::install {
     default  : { fail("Unsupported Operating System") }
   } # end case ::operatingsystem
 
+  if ( $::hpcc::package_installed ) {
+    exec { 'install hpccsystems-platform':
+      path   => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+      cmd    => "sudo ${packtype} ${removal} hpccsystems-platform",
+      source => "/tmp/${pack}",
+    }
 
-  package { 'hpccsystems-platform':
-    ensure        => installed,
-    provider      => $packtype,
-    source        => "/tmp/${pack}",
+    exec { '/tmp/hpccsystems-platform':
+      cwd     => '/tmp',
+      command => "/usr/bin/wget http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
+      before  => Exec['hpccsystems-platform'],
+      unless  => '/bin/bash -c \'[[ -e /etc/init.d/hpcc-init ]]\'',
+    }
   }
-
-  exec { '/tmp/hpccsystems-platform':
-    cwd     => '/tmp',
-    command => "/usr/bin/wget http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
-    before  => Package['hpccsystems-platform'],
-    unless  => '/bin/bash -c \'[[ -e /etc/init.d/hpcc-init ]]\'',
+  else {
+    exec { 'remove hpccsystems-platform':
+      path => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+      cmd  => "sudo ${packtype} ${removal} hpccsystems-platform",
+    }
   }
 }

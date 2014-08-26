@@ -30,11 +30,12 @@
 
 class hpcc::params
 {
-  $role           = 'computation'
-  $plugin         = false
-  $version        = '5.0.0-2'
-  $majver         = '5.0.0'
-  
+  $package_installed    = true
+  $role                 = 'computation'
+  $plugin               = false
+  $version              = '5.0.0-2'
+  $majver               = '5.0.0'
+
   $config_env           = true
   $config_support       = '1'
   $config_roxie         = '1'
