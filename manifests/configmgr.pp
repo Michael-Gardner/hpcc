@@ -13,8 +13,8 @@ class hpcc::configmgr
  
     exec { 'master environment.xml':
       path        => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-      command     => 'mv -f newEnvironment.xml environment.xml',
-      unless      => 'diff newEnvironment.xml environment.xml',
+      command     => 'mv -f ../files/newEnvironment.xml ../files/environment.xml',
+      unless      => 'diff ../files/newEnvironment.xml ../files/environment.xml',
       refreshonly => true,
     }
 
