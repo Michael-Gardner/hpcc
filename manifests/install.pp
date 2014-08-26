@@ -49,7 +49,7 @@ class hpcc::install {
   if ( $::hpcc::package_installed ) {
     exec { 'install hpccsystems-platform':
       path   => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-      cmd    => "sudo ${packtype} ${removal} hpccsystems-platform",
+      cmd    => "sudo ${packtype} -i hpccsystems-platform",
       source => "/tmp/${pack}",
     }
 
