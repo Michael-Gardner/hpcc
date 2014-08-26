@@ -31,9 +31,6 @@ class hpcc::params
 {
   $role           = 'computation'
   $plugin         = false
-  $config_dir     = '/etc/HPCCSystems'
-  $service_ensure = true
-  $service_enable = true
   $version        = '5.0.0-2'
   $majver         = '5.0.0'
   

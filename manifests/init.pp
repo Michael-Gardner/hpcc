@@ -49,8 +49,7 @@ class hpcc
       Class['hpcc::dependencies'] ->
         Class['hpcc::install'] ->
           Class['hpcc::config'] ~>
-            Class['hpcc::service'] ->
-              Anchor['hpcc::end']
+            Anchor['hpcc::end']
   }
 
   if ( $role == 'master' ) {
