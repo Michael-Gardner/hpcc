@@ -48,22 +48,30 @@ class hpcc::install {
 
   if ( $::hpcc::package_installed ) {
     exec { 'install hpccsystems-platform':
-      path   => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-      cmd    => "sudo ${packtype} -i hpccsystems-platform",
-      source => "/tmp/${pack}",
+      path        => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+      command     => "sudo ${packtype} -i /tmp/${pack}", 
+      refreshonly => true,
     }
 
     exec { '/tmp/hpccsystems-platform':
       cwd     => '/tmp',
       command => "/usr/bin/wget http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
-      before  => Exec['hpccsystems-platform'],
       unless  => '/bin/bash -c \'[[ -e /etc/init.d/hpcc-init ]]\'',
     }
+
+    anchor { 'hpcc::install::begin': }
+    anchor { 'hpcc::install::end': }
+
+    Anchor['hpcc::install::begin']->
+      Exec['/tmp/hpccsystems-platform']~>
+      Exec['install hpccsystems-platform']->
+    Anchor['hpcc::install::end']
+
   }
   else {
     exec { 'remove hpccsystems-platform':
-      path => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-      cmd  => "sudo ${packtype} ${removal} hpccsystems-platform",
+      path    => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
+      command => "sudo ${packtype} ${removal} hpccsystems-platform",
     }
   }
 }
