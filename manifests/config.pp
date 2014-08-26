@@ -49,7 +49,7 @@ class hpcc::config {
 
   exec { 'hpcc/environment.xml':
     # combine them into this so it's as atomic as we can make it.
-    command => '/bin/bash -c \'service hpcc-init stop && /bin/cp environment.xml.puppet environment.xml\'',
+    command => '/bin/bash -c \'service hpcc-init stop; /bin/cp environment.xml.puppet environment.xml\'',
     unless  => '/bin/bash -c \'diff environment.xml.puppet environment.xml\'', # diff returns 0 if they match
     cwd     => '/etc/HPCCSystems/',
   }
