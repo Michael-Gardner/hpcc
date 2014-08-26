@@ -2,3 +2,10 @@ TODO
 
 * Add support for NAT to ECL Watch service on 8010
 * Get sudo out of my exec's
+
+* Necessary Ports
+	7100   (jsocket)
+	20000  (mythor)
+	20100  (individual slave connections)
+	20300
+	20500
