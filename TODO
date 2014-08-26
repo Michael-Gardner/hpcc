@@ -1,4 +1,4 @@
 TODO
 
-* Add support for Envgen to dump directly into ../files for environment.xml
-* Add support for keygen to automatically dump into ../files for both the pub and private keys
+* Add support for NAT to ECL Watch service on 8010
+
