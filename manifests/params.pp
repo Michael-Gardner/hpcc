@@ -35,6 +35,8 @@ class hpcc::params
   $plugin               = false
   $version              = '5.0.0-2'
   $majver               = '5.0.0'
+  $firewall             = true
+  $forwarding           = true
 
   $config_env           = true
   $config_support       = '1'

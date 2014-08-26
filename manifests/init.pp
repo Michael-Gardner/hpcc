@@ -11,6 +11,8 @@ class hpcc
   $majver               = $hpcc::params::majver,
   $version              = $hpcc::params::version,
   $role                 = $hpcc::params::role,
+  $firewall             = $hpcc::params::firewall,
+  $forwarding           = $hpcc::params::forwarding,
 
   $config_env           = $hpcc::params::config_env,
   $config_support       = $hpcc::params::config_support,
@@ -24,21 +26,28 @@ class hpcc
   validate_bool($plugin,$config_env,$package_installed)
   validate_string($version,$majver,$role,$config_support,$config_roxie)
   validate_string($config_thor,$config_tslave)
-  
+  if $firewall {
+    validate_bool($firewall,$forwarding)
+  }
+
   $config_roxieondemand_str = $config_roxieondemand ? {
     false   => '2',
     default => '1',
   }
-
   # end validation
 
-
+  # chaining
   anchor { 'hpcc::begin': }
   anchor { 'hpcc::end': }
 
   class { 'hpcc::dependencies': }
   class { 'hpcc::install': }
   class { 'hpcc::config': }
+
+  if $firewall {
+    class { 'hpcc::firewall': }
+  }
+
 
   if ( $role == 'computation' ) {
   # setup resource chain
