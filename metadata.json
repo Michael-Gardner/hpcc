@@ -10,7 +10,11 @@
   	{
   		"name": "puppetlabs/stdlib",
   		"version_requirement": ">= 4.0.0"
-  	}
+  	},
+    {
+      "name": "puppetlabs/firewall",
+      "version_requirement": ">= 1.x"
+    }
   ],
   "operatingsystem_support": [
   	{
