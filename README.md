@@ -7,10 +7,11 @@
 3. [Setup](#setup)
     * [Master configuration - What it does](#master-configuration)
     * [Computational Node configuration](#computation-nodes)
-4. [Usage](#usage)
     * [Envgen - What it entails](#envgen)
     * [Manual iplist cluster management](#the-iplist-file)
     * [Environment.xml propagation](#environment.xml-propagation)
+4. [Usage](#usage)
+    * [Running the cluster](#running-the-cluster)
 5. [Limitations](#limitations)
 6. [License](#license)
 7. [Contact Us](#contact)
@@ -52,8 +53,6 @@ node computation {
 }
 ```
 
-##Usage
-
 ####Keygen
 
 
@@ -67,6 +66,7 @@ Envgen is the script that allows us to map nodes in the cluster to specific role
 
 .../hpcc/files/iplist must be implemented.  You may use hpcc/files/iplist.example as a reference for how to format the file.  The iplist file is used to help generate the environment.xml manifest that will configure all your nodes.
 
+##Usage
 
 ##Limitations
 
