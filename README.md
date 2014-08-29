@@ -77,7 +77,7 @@ sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -a hpcc-init status
 
 sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -a hpcc-init start
 
-sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -c <component name> <action>
+sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -c \<component name\> \<action\>
 
 sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -c mythor start
 
