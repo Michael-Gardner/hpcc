@@ -74,9 +74,11 @@ Envgen is the script that allows us to map nodes in the cluster to specific role
 The primary tool you will use to run the cluster is located in /opt/HPCCSystems/sbin and is called hpcc-run.sh.   This tool allows us to remotely run hpcc-init or individual component commands across all the machines that are declared in our environment.xml file (which was in turn, generated from Envgen and the iplist file.)  The tool should be run as the user 'hpcc' and the following examples will clarify the usage.
 
 sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -a hpcc-init status
+
 sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -a hpcc-init start
 
 sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -c <component name> <action>
+
 sudo -u hpcc /opt/HPCCSystems/sbin/hpcc-run.sh -c mythor start
 
 
