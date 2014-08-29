@@ -47,7 +47,6 @@ Under your nodes.pp or site.pp it will be necessary to include the hpcc class.  
 
 ```puppet
 # $(confdir)/environments/<myenv>/manifests/nodes.pp
-
 node "computationNode1.exampledomain" {
   include hpcc
 }
