@@ -30,7 +30,7 @@
 
 class hpcc::params
 {
-  $package_installed    = true
+  $package_ensure       = 'present'
   $role                 = 'computation'
   $plugin               = false
   $version              = '5.0.0-2'

@@ -15,7 +15,6 @@ class hpcc::install {
   case $::operatingsystem {
     'Ubuntu' : {
       $packtype = "dpkg"
-      $removal  = "-r"
       case $::operatingsystemrelease {
         '10.04' : { $pack = "${pname}${ver}lucid_amd64.deb" }
         '12.04' : { $pack = "${pname}${ver}precise_amd64.deb" }
@@ -28,7 +27,6 @@ class hpcc::install {
     } # end case Ubuntu
     'CentOS' : {
       $packtype = "rpm"
-      $removal  = "-e"
       case $::operatingsystemmajrelease {
         '5': { 
           $pack = $::hpcc::plugin ? {
@@ -46,32 +44,24 @@ class hpcc::install {
     default  : { fail("Unsupported Operating System") }
   } # end case ::operatingsystem
 
-  if ( $::hpcc::package_installed ) {
-    exec { 'install hpccsystems-platform':
-      path        => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-      command     => "sudo ${packtype} -i /tmp/${pack}", 
-      refreshonly => true,
-    }
-
-    exec { '/tmp/hpccsystems-platform':
-      cwd     => '/tmp',
-      command => "/usr/bin/wget http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
-      unless  => '/bin/bash -c \'[[ -e /etc/init.d/hpcc-init ]]\'',
-    }
-
-    anchor { 'hpcc::install::begin': }
-    anchor { 'hpcc::install::end': }
-
-    Anchor['hpcc::install::begin']->
-      Exec['/tmp/hpccsystems-platform']~>
-      Exec['install hpccsystems-platform']->
-    Anchor['hpcc::install::end']
-
+  package { 'hpccsystems-platform':
+    ensure        => $::hpcc::package_ensure,
+    provider      => $packtype,
+    source        => "/tmp/${pack}",
+    allow_virtual => false,
   }
-  else {
-    exec { 'remove hpccsystems-platform':
-      path    => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
-      command => "sudo ${packtype} ${removal} hpccsystems-platform",
-    }
+
+  exec { '/tmp/hpccsystems-platform':
+    cwd     => '/tmp',
+    command => "/usr/bin/wget http://cdn.hpccsystems.com/releases/CE-Candidate-${majver}/bin/platform/${pack}",
+    unless  => '/bin/bash -c \'[[ -e /etc/init.d/hpcc-init ]]\'',
   }
+
+  anchor { 'hpcc::install::begin': }
+  anchor { 'hpcc::install::end': }
+
+  Anchor['hpcc::install::begin']->
+    Exec['/tmp/hpccsystems-platform']->
+    Package['hpccsystems-platform']->
+  Anchor['hpcc::install::end']
 }
