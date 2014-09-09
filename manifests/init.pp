@@ -6,7 +6,7 @@
 # see hpcc::params for information regarding parameters
 #
 class hpcc
-( $package_installed    = $hpcc::params::package_installed,
+( $package_ensure    = $hpcc::params::package_ensure,
   $plugin               = $hpcc::params::plugin,
   $majver               = $hpcc::params::majver,
   $version              = $hpcc::params::version,
@@ -23,9 +23,9 @@ class hpcc
 ) inherits hpcc::params {
 
   # validation
-  validate_bool($plugin,$config_env,$package_installed)
+  validate_bool($plugin,$config_env)
   validate_string($version,$majver,$role,$config_support,$config_roxie)
-  validate_string($config_thor,$config_tslave)
+  validate_string($config_thor,$config_tslave,$package_ensure)
   if $firewall {
     validate_bool($firewall,$forwarding)
   }
